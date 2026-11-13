@@ -1,0 +1,197 @@
+{
+ "name": "PensarMucho",
+ "meta": {
+  "topic": "pensar mucho / pensar a fondo",
+  "metaphor": "burbuja de pensamiento con un engranaje girando sin parar y una gota de sudor"
+ },
+ "canvas": {
+  "w": 232,
+  "h": 122
+ },
+ "loop": 4.0,
+ "clawd": {
+  "x": 14,
+  "y": 26
+ },
+ "props": [
+  {
+   "type": "sprite",
+   "id": "bubble",
+   "x": 134,
+   "y": 4,
+   "hidden": true,
+   "palette": {
+    "o": "gray",
+    "w": "white"
+   },
+   "rows": [
+    "...oooooooo...",
+    ".oowwwwwwwwoo.",
+    "owwwwwwwwwwwwo",
+    "owwwwwwwwwwwwo",
+    "owwwwwwwwwwwwo",
+    "owwwwwwwwwwwwo",
+    "owwwwwwwwwwwwo",
+    "owwwwwwwwwwwwo",
+    "owwwwwwwwwwwwo",
+    "owwwwwwwwwwwwo",
+    ".oowwwwwwwwoo.",
+    "...oooooooo...",
+    "..oo..........",
+    "oo............"
+   ]
+  },
+  {
+   "type": "sprite",
+   "id": "gear",
+   "x": 155,
+   "y": 16,
+   "hidden": true,
+   "palette": {
+    "o": "orange"
+   },
+   "frames": [
+    [
+     "...o...",
+     ".o.o.o.",
+     "..ooo..",
+     "ooo.ooo",
+     "..ooo..",
+     ".o.o.o.",
+     "...o..."
+    ],
+    [
+     "o.....o",
+     ".o...o.",
+     "..ooo..",
+     "..o.o..",
+     "..ooo..",
+     ".o...o.",
+     "o.....o"
+    ]
+   ]
+  },
+  {
+   "type": "sprite",
+   "id": "drop",
+   "x": 112,
+   "y": 16,
+   "px": 4,
+   "hidden": true,
+   "palette": {
+    "b": "blue"
+   },
+   "rows": [
+    "..b..",
+    ".bbb.",
+    "bbbbb",
+    "bbbbb",
+    "bbbbb",
+    ".bbb.",
+    "..b.."
+   ]
+  }
+ ],
+ "timeline": [
+  {
+   "at": 0.2,
+   "action": "pose",
+   "pose": "think",
+   "dur": 0.5
+  },
+  {
+   "at": 0.4,
+   "action": "appear",
+   "target": "bubble",
+   "fade": 0.2
+  },
+  {
+   "at": 0.5,
+   "action": "appear",
+   "target": "gear",
+   "fade": 0.2
+  },
+  {
+   "at": 0.7,
+   "action": "cycle",
+   "target": "gear",
+   "frames": [
+    1,
+    0,
+    1,
+    0,
+    1,
+    0,
+    1,
+    0,
+    1,
+    0,
+    1,
+    0,
+    1,
+    0
+   ],
+   "every": 0.17,
+   "dur": 2.4,
+   "end": 0
+  },
+  {
+   "at": 1.7,
+   "action": "blink",
+   "hold": 0.2
+  },
+  {
+   "at": 2.0,
+   "action": "appear",
+   "target": "drop",
+   "fade": 0.1
+  },
+  {
+   "at": 2.1,
+   "action": "move",
+   "target": "drop",
+   "dx": 0,
+   "dy": 22,
+   "dur": 0.6,
+   "ease": "power2.in"
+  },
+  {
+   "at": 2.7,
+   "action": "disappear",
+   "target": "drop",
+   "fade": 0.1
+  },
+  {
+   "at": 2.85,
+   "action": "moveTo",
+   "target": "drop",
+   "x": 112,
+   "y": 16,
+   "dur": 0
+  },
+  {
+   "at": 3.1,
+   "action": "disappear",
+   "target": "gear",
+   "fade": 0.2
+  },
+  {
+   "at": 3.1,
+   "action": "disappear",
+   "target": "bubble",
+   "fade": 0.2
+  },
+  {
+   "at": 3.2,
+   "action": "pose",
+   "pose": "rest",
+   "dur": 0.4
+  }
+ ],
+ "overlap_ok": [
+  [
+   "bubble",
+   "gear"
+  ]
+ ]
+}

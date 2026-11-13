@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>export</title>
+<style>html,body{margin:0;padding:0;background:transparent;overflow:hidden}svg{display:block;width:100vw;height:100vh}</style>
+</head>
+<body>
+<svg id="scene" xmlns="http://www.w3.org/2000/svg"><defs></defs></svg>
+<script src="vendor/gsap.min.js"></script>
+<script src="clawd.js"></script>
+<script src="parts/props.js"></script>
+<script src="parts/actions.js"></script>
+<script src="render.js"></script>
+<script>
+  // Bare transparent page used by export_gif.py: ?scene=<name>&t=<seconds> freezes the timeline at t.
+  const q = new URLSearchParams(location.search);
+  fetch(q.get("src") || `scenes/${q.get("scene") || "computing"}.scene.json`)
+    .then((r) => r.json())
+    .then((spec) => {
+      const tl = window.sceneTL = Clawd.render(document.getElementById("scene"), spec);
+      tl.pause(parseFloat(q.get("t")) || 0);
+    });
+</script>
+</body>
+</html>

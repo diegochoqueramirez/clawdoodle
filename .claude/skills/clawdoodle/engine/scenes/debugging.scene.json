@@ -1,0 +1,146 @@
+{
+ "name": "Debugging",
+ "meta": {
+  "topic": "finding a bug",
+  "metaphor": "magnifying glass follows a flying bug until it is caught"
+ },
+ "canvas": {
+  "w": 232,
+  "h": 122
+ },
+ "loop": 4.0,
+ "clawd": {
+  "x": 14,
+  "y": 26
+ },
+ "props": [
+  {
+   "type": "sprite",
+   "id": "bug",
+   "x": 134,
+   "y": 26,
+   "palette": {
+    "r": "red",
+    "i": "ink"
+   },
+   "frames": [
+    [
+     "...i...i...",
+     "....iii....",
+     "..rrrirrr..",
+     "i.riririr.i",
+     ".rrrrirrrr.",
+     "i.rrrirrr.i",
+     "..rrrirrr.."
+    ],
+    [
+     "...i...i...",
+     "....iii....",
+     "..rrrirrr..",
+     "..riririr..",
+     "irrrrirrrri",
+     "..rrrirrr..",
+     "..rrrirrr.."
+    ]
+   ]
+  },
+  {
+   "type": "sprite",
+   "id": "lens",
+   "x": 137,
+   "y": 23,
+   "layer": "front",
+   "palette": {
+    "o": "dark",
+    "h": "brown"
+   },
+   "rows": [
+    "..oooooo..",
+    ".o......o.",
+    "o........o",
+    "o........o",
+    "o........o",
+    "o........o",
+    ".o......o.",
+    "..oooooo..",
+    "....hh....",
+    "....hh...."
+   ]
+  }
+ ],
+ "timeline": [
+  {
+   "at": 0.0,
+   "action": "cycle",
+   "target": "bug",
+   "frames": [
+    0,
+    1
+   ],
+   "every": 0.15,
+   "dur": 4.0
+  },
+  {
+   "at": 0.2,
+   "action": "pose",
+   "pose": "look_r",
+   "dur": 0.4
+  },
+  {
+   "at": 0.5,
+   "action": "move",
+   "target": "bug",
+   "dx": 24,
+   "dur": 1.3,
+   "back": true,
+   "hold": 0.5
+  },
+  {
+   "at": 0.5,
+   "action": "move",
+   "target": "lens",
+   "dx": 24,
+   "dur": 1.3,
+   "back": true,
+   "hold": 0.5
+  },
+  {
+   "at": 1.8,
+   "action": "pulse",
+   "target": "lens",
+   "scale": 1.15,
+   "dur": 0.3
+  },
+  {
+   "at": 1.8,
+   "action": "shake",
+   "target": "bug",
+   "amp": 2,
+   "count": 4,
+   "dur": 0.4
+  },
+  {
+   "at": 1.8,
+   "action": "pose",
+   "pose": "cheer",
+   "dur": 0.3
+  },
+  {
+   "at": 3.0,
+   "action": "pose",
+   "pose": "rest",
+   "dur": 0.4
+  },
+  {
+   "at": 3.6,
+   "action": "blink",
+   "hold": 0.22
+  }
+ ],
+ "overlap_ok": [
+  [
+   "bug",
+   "lens"
+  ]
+ ]
+}

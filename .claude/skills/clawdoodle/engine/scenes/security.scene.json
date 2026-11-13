@@ -1,0 +1,123 @@
+{
+ "name": "Security",
+ "meta": {
+  "topic": "security / access",
+  "metaphor": "a key slides into a padlock and it snaps shut"
+ },
+ "canvas": {
+  "w": 232,
+  "h": 122
+ },
+ "loop": 4.0,
+ "clawd": {
+  "x": 14,
+  "y": 26
+ },
+ "props": [
+  {
+   "type": "sprite",
+   "id": "lock",
+   "x": 176,
+   "y": 52,
+   "palette": {
+    "g": "gray",
+    "s": "steel",
+    "i": "ink"
+   },
+   "frames": [
+    [
+     "..gggg..",
+     ".g....g.",
+     ".g......",
+     ".g......",
+     "ssssssss",
+     "ssssssss",
+     "sssiisss",
+     "sssiisss",
+     "ssssssss",
+     "ssssssss"
+    ],
+    [
+     "..gggg..",
+     ".g....g.",
+     ".g....g.",
+     ".g....g.",
+     "ssssssss",
+     "ssssssss",
+     "sssiisss",
+     "sssiisss",
+     "ssssssss",
+     "ssssssss"
+    ]
+   ]
+  },
+  {
+   "type": "sprite",
+   "id": "key",
+   "x": 116,
+   "y": 82,
+   "layer": "front",
+   "palette": {
+    "o": "yellow"
+   },
+   "rows": [
+    "ooo......",
+    "o.ooooooo",
+    "ooo..o.o."
+   ]
+  }
+ ],
+ "timeline": [
+  {
+   "at": 0.2,
+   "action": "pose",
+   "pose": "look_r",
+   "dur": 0.4
+  },
+  {
+   "at": 0.6,
+   "action": "move",
+   "target": "key",
+   "dx": 28,
+   "dur": 0.9,
+   "back": true,
+   "hold": 1.2
+  },
+  {
+   "at": 1.5,
+   "action": "swap",
+   "target": "lock",
+   "frame": 1
+  },
+  {
+   "at": 1.5,
+   "action": "pulse",
+   "target": "lock",
+   "scale": 1.12,
+   "dur": 0.3
+  },
+  {
+   "at": 1.55,
+   "action": "pose",
+   "pose": "cheer",
+   "dur": 0.3
+  },
+  {
+   "at": 3.0,
+   "action": "pose",
+   "pose": "rest",
+   "dur": 0.4
+  },
+  {
+   "at": 3.0,
+   "action": "swap",
+   "target": "lock",
+   "frame": 0
+  },
+  {
+   "at": 3.6,
+   "action": "blink",
+   "hold": 0.2
+  }
+ ]
+}

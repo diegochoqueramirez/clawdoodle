@@ -1,0 +1,188 @@
+{
+ "_comment": "Sprite templates. Each has its own palette: remap with --colors a=name (e.g. clawd.py add-sprite <slug> cloud --colors w=light).",
+ "templates": {
+  "faces": {
+   "desc": "three expressions (frames 0 happy, 1 neutral, 2 sad) for a robot/screen; switch with swap",
+   "px": 5,
+   "palette": {
+    "i": "ink"
+   },
+   "frames": [
+    [
+     "..i.....i..",
+     "..i.....i..",
+     "...........",
+     ".i.......i.",
+     "..iiiiiii.."
+    ],
+    [
+     "..i.....i..",
+     "..i.....i..",
+     "...........",
+     "...........",
+     "..iiiiiii.."
+    ],
+    [
+     "..i.....i..",
+     "..i.....i..",
+     "...........",
+     "..iiiiiii..",
+     ".i.......i."
+    ]
+   ]
+  },
+  "check": {
+   "desc": "green tick (success, tests passed)",
+   "px": 6,
+   "palette": {
+    "g": "green"
+   },
+   "rows": [
+    "......g",
+    ".....gg",
+    "g...gg.",
+    "gg.gg..",
+    ".ggg...",
+    "..g...."
+   ]
+  },
+  "cross": {
+   "desc": "red cross (failure, error, blocked)",
+   "px": 6,
+   "palette": {
+    "r": "red"
+   },
+   "rows": [
+    "r.....r",
+    ".r...r.",
+    "..r.r..",
+    "...r...",
+    "..r.r..",
+    ".r...r.",
+    "r.....r"
+   ]
+  },
+  "cloud": {
+   "desc": "cloud with a gray edge (white fill needs the edge on cream backgrounds)",
+   "px": 6,
+   "palette": {
+    "o": "gray",
+    "w": "white"
+   },
+   "rows": [
+    "...oooo.....",
+    "..owwwwo.oo.",
+    ".owwwwwwowwo",
+    "owwwwwwwwwwo",
+    "owwwwwwwwwwo",
+    ".oowwwwwwoo.",
+    "...oooooo..."
+   ]
+  },
+  "drop": {
+   "desc": "water drop / liquid / rain",
+   "px": 6,
+   "palette": {
+    "b": "blue"
+   },
+   "rows": [
+    "..b..",
+    "..b..",
+    ".bbb.",
+    ".bbb.",
+    "bbbbb",
+    "bbbbb",
+    ".bbb."
+   ]
+  },
+  "sun": {
+   "desc": "sun with rays",
+   "px": 6,
+   "palette": {
+    "y": "yellow",
+    "o": "orange"
+   },
+   "rows": [
+    "....o....",
+    ".o.yyy.o.",
+    "..yyyyy..",
+    ".yyyyyyy.",
+    "oyyyyyyyo",
+    ".yyyyyyy.",
+    "..yyyyy..",
+    ".o.yyy.o.",
+    "....o...."
+   ]
+  },
+  "document": {
+   "desc": "document / file with text lines",
+   "px": 6,
+   "palette": {
+    "g": "gray",
+    "w": "white",
+    "b": "blue"
+   },
+   "rows": [
+    "gggggggg",
+    "gwwwwwwg",
+    "gwbbbbwg",
+    "gwwwwwwg",
+    "gwbbbbwg",
+    "gwwwwwwg",
+    "gwbbwwwg",
+    "gwwwwwwg",
+    "gwwwwwwg",
+    "gggggggg"
+   ]
+  },
+  "folder": {
+   "desc": "folder / directory",
+   "px": 6,
+   "palette": {
+    "o": "orange",
+    "y": "yellow"
+   },
+   "rows": [
+    "ooooo.....",
+    "oyyyyyyyyo",
+    "oyyyyyyyyo",
+    "oyyyyyyyyo",
+    "oyyyyyyyyo",
+    "oyyyyyyyyo",
+    "oooooooooo"
+   ]
+  },
+  "arrow_right": {
+   "desc": "arrow pointing right (flow, next, send)",
+   "px": 6,
+   "palette": {
+    "a": "dark"
+   },
+   "rows": [
+    "....a...",
+    "....aa..",
+    "aaaaaaa.",
+    "aaaaaaaa",
+    "aaaaaaa.",
+    "....aa..",
+    "....a..."
+   ]
+  },
+  "arrow_down": {
+   "desc": "arrow pointing down (download, falls, deploy)",
+   "px": 6,
+   "palette": {
+    "a": "dark"
+   },
+   "rows": [
+    "...a...",
+    "...a...",
+    "...a...",
+    "aaaaaaa",
+    ".aaaaa.",
+    "..aaa..",
+    "...a..."
+   ]
+  }
+ }
+}

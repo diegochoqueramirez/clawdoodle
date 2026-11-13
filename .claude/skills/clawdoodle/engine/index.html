@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Clawd - SVG + GSAP</title>
+<style>
+  :root { --bg:#f5f0e6; --ink:#2b2118; --card:#fff; --accent:#DD775B; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#1d1814; --ink:#efe6da; --card:#2a231d; } }
+  body { margin:0; padding:24px 16px; background:var(--bg); color:var(--ink); font-family:system-ui,sans-serif; }
+  main { max-width:720px; margin:0 auto; text-align:center; }
+  .stage { background:var(--card); border-radius:16px; padding:12px; }
+  svg { width:100%; height:auto; display:block; }
+  .controls { display:flex; gap:12px; align-items:center; justify-content:center; margin-top:12px; }
+  button { background:var(--accent); color:#fff; border:0; border-radius:8px; padding:8px 14px; font-size:14px; cursor:pointer; }
+  input[type=range] { flex:1; max-width:360px; }
+</style>
+</head>
+<body>
+<main>
+  <h1 id="title">Clawd</h1>
+  <div class="stage"><svg id="scene" xmlns="http://www.w3.org/2000/svg"><defs></defs></svg></div>
+  <div class="controls">
+    <button id="toggle">Pausa</button>
+    <input id="seek" type="range" min="0" max="1" step="0.01" value="0" aria-label="Tiempo">
+    <span id="time">0.00s</span>
+  </div>
+</main>
+<script src="vendor/gsap.min.js"></script>
+<script src="clawd.js"></script>
+<script src="parts/props.js"></script>
+<script src="parts/actions.js"></script>
+<script src="render.js"></script>
+<script>
+  // Preview: index.html?scene=computing  (optional &t=1.5 to freeze at a time)
+  const q = new URLSearchParams(location.search);
+  const seek = document.getElementById("seek"), time = document.getElementById("time"), btn = document.getElementById("toggle");
+  fetch(q.get("src") || `scenes/${q.get("scene") || "computing"}.scene.json`).then((r) => r.json()).then((spec) => {
+    document.getElementById("title").textContent = spec.name;
+    document.title = `Clawd ${spec.name} - SVG + GSAP`;
+    seek.max = spec.loop;
+    const tl = window.sceneTL = Clawd.render(document.getElementById("scene"), spec);
+    const t0 = parseFloat(q.get("t"));
+    if (!isNaN(t0)) { tl.pause(t0); btn.textContent = "Play"; }
+    gsap.ticker.add(() => { if (!tl.paused()) { seek.value = tl.time() % spec.loop; time.textContent = (tl.time() % spec.loop).toFixed(2) + "s"; } });
+    seek.addEventListener("input", () => { tl.pause(parseFloat(seek.value)); btn.textContent = "Play"; time.textContent = parseFloat(seek.value).toFixed(2) + "s"; });
+    btn.addEventListener("click", () => { tl.paused() ? (tl.play(), btn.textContent = "Pausa") : (tl.pause(), btn.textContent = "Play"); });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+{
+ "name": "Cache",
+ "meta": {
+  "topic": "what a cache is",
+  "metaphor": "a small crate right next to Clawd gives instant data (lightning) while the big far cabinet stays idle"
+ },
+ "canvas": {
+  "w": 240,
+  "h": 122
+ },
+ "loop": 3.0,
+ "clawd": {
+  "x": 14,
+  "y": 26
+ },
+ "props": [
+  {
+   "type": "sprite",
+   "id": "far",
+   "x": 196,
+   "y": 56,
+   "px": 4,
+   "palette": {
+    "d": "gray",
+    "s": "light",
+    "g": "light",
+    "l": "gray",
+    "i": "gray"
+   },
+   "rows": [
+    "dddddddddd",
+    "dssssssssd",
+    "dsggggggsd",
+    "dsgglllgsd",
+    "dsggggggsd",
+    "dssssssssd",
+    "dsggggggsd",
+    "dsgglllgsd",
+    "dsggggggsd",
+    "dssssssssd",
+    "dsggggggsd",
+    "dsgglllgsd",
+    "dsggggggsd",
+    "dddddddddd"
+   ]
+  },
+  {
+   "type": "sprite",
+   "id": "crate",
+   "x": 136,
+   "y": 64,
+   "palette": {
+    "d": "dark",
+    "b": "brown",
+    "y": "yellow"
+   },
+   "frames": [
+    [
+     "........",
+     "........",
+     "dddddddd",
+     "bbbbbbbb",
+     "bdbbbbdb",
+     "bbbbbbbb",
+     "bdbbbbdb",
+     "dddddddd"
+    ],
+    [
+     ".dddddd.",
+     "........",
+     "dyyyyyyd",
+     "bbbbbbbb",
+     "bdbbbbdb",
+     "bbbbbbbb",
+     "bdbbbbdb",
+     "dddddddd"
+    ]
+   ]
+  },
+  {
+   "type": "sprite",
+   "id": "bolt",
+   "x": 148,
+   "y": 28,
+   "hidden": true,
+   "palette": {
+    "y": "yellow"
+   },
+   "rows": [
+    "...yy",
+    "..yy.",
+    ".yyyy",
+    "..yy.",
+    ".yy.."
+   ]
+  }
+ ],
+ "timeline": [
+  {
+   "at": 0.2,
+   "action": "pose",
+   "pose": "look_r",
+   "dur": 0.4
+  },
+  {
+   "at": 0.6,
+   "action": "swap",
+   "target": "crate",
+   "frame": 1
+  },
+  {
+   "at": 0.6,
+   "action": "appear",
+   "target": "bolt",
+   "fade": 0.05
+  },
+  {
+   "at": 0.65,
+   "action": "pulse",
+   "target": "bolt",
+   "scale": 1.25,
+   "dur": 0.3
+  },
+  {
+   "at": 0.9,
+   "action": "pose",
+   "pose": "cheer",
+   "dur": 0.25
+  },
+  {
+   "at": 1.7,
+   "action": "disappear",
+   "target": "bolt",
+   "fade": 0.1
+  },
+  {
+   "at": 1.8,
+   "action": "swap",
+   "target": "crate",
+   "frame": 0
+  },
+  {
+   "at": 2.0,
+   "action": "pose",
+   "pose": "rest",
+   "dur": 0.4
+  },
+  {
+   "at": 2.6,
+   "action": "blink",
+   "hold": 0.2
+  }
+ ]
+}

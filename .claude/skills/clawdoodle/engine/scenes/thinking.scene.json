@@ -1,0 +1,166 @@
+{
+ "name": "Thinking",
+ "meta": {
+  "topic": "reasoning / thinking before answering",
+  "metaphor": "thought bubble that fills with dots, then a light bulb"
+ },
+ "canvas": {
+  "w": 224,
+  "h": 122
+ },
+ "loop": 3.6,
+ "clawd": {
+  "x": 14,
+  "y": 26
+ },
+ "props": [
+  {
+   "type": "sprite",
+   "id": "bubble",
+   "x": 136,
+   "y": 12,
+   "hidden": true,
+   "palette": {
+    "o": "gray",
+    "w": "white",
+    "d": "dark"
+   },
+   "frames": [
+    [
+     "...oooooo...",
+     ".oowwwwwwoo.",
+     "owwwwwwwwwwo",
+     "owwdwwwwwwwo",
+     "owwwwwwwwwwo",
+     ".oowwwwwwoo.",
+     "...oooooo...",
+     "..oo........",
+     "..oo........",
+     "oo..........",
+     "oo.........."
+    ],
+    [
+     "...oooooo...",
+     ".oowwwwwwoo.",
+     "owwwwwwwwwwo",
+     "owwdwwdwwwwo",
+     "owwwwwwwwwwo",
+     ".oowwwwwwoo.",
+     "...oooooo...",
+     "..oo........",
+     "..oo........",
+     "oo..........",
+     "oo.........."
+    ],
+    [
+     "...oooooo...",
+     ".oowwwwwwoo.",
+     "owwwwwwwwwwo",
+     "owwdwwdwwdwo",
+     "owwwwwwwwwwo",
+     ".oowwwwwwoo.",
+     "...oooooo...",
+     "..oo........",
+     "..oo........",
+     "oo..........",
+     "oo.........."
+    ]
+   ]
+  },
+  {
+   "type": "sprite",
+   "id": "bulb",
+   "x": 158,
+   "y": 22,
+   "hidden": true,
+   "palette": {
+    "y": "yellow",
+    "g": "gray",
+    "d": "dark"
+   },
+   "rows": [
+    "..yyy..",
+    ".yyyyy.",
+    "yyyyyyy",
+    "yyyyyyy",
+    ".yyyyy.",
+    "..yyy..",
+    "..ggg..",
+    "..ddd..",
+    "...d..."
+   ]
+  }
+ ],
+ "timeline": [
+  {
+   "at": 0.2,
+   "action": "pose",
+   "pose": "think",
+   "dur": 0.5
+  },
+  {
+   "at": 0.5,
+   "action": "appear",
+   "target": "bubble",
+   "fade": 0.15
+  },
+  {
+   "at": 0.7,
+   "action": "cycle",
+   "target": "bubble",
+   "frames": [
+    0,
+    1,
+    2
+   ],
+   "every": 0.35,
+   "dur": 1.4
+  },
+  {
+   "at": 2.1,
+   "action": "disappear",
+   "target": "bubble"
+  },
+  {
+   "at": 2.1,
+   "action": "appear",
+   "target": "bulb"
+  },
+  {
+   "at": 2.1,
+   "action": "pulse",
+   "target": "bulb",
+   "scale": 1.2,
+   "dur": 0.35
+  },
+  {
+   "at": 2.2,
+   "action": "pose",
+   "pose": "cheer",
+   "dur": 0.3
+  },
+  {
+   "at": 3.0,
+   "action": "disappear",
+   "target": "bulb",
+   "fade": 0.2
+  },
+  {
+   "at": 3.0,
+   "action": "pose",
+   "pose": "rest",
+   "dur": 0.4
+  },
+  {
+   "at": 1.4,
+   "action": "blink",
+   "hold": 0.2
+  }
+ ],
+ "overlap_ok": [
+  [
+   "bubble",
+   "bulb"
+  ]
+ ]
+}

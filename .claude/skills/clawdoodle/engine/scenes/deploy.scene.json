@@ -1,0 +1,151 @@
+{
+ "name": "Deploy",
+ "meta": {
+  "topic": "deploying / shipping",
+  "metaphor": "rocket lifts off from a pad, then a new one is ready"
+ },
+ "canvas": {
+  "w": 232,
+  "h": 122
+ },
+ "loop": 4.0,
+ "clawd": {
+  "x": 14,
+  "y": 26
+ },
+ "props": [
+  {
+   "type": "sprite",
+   "id": "pad",
+   "x": 170,
+   "y": 100,
+   "palette": {
+    "d": "dark"
+   },
+   "rows": [
+    "dddddddd",
+    "dddddddd"
+   ]
+  },
+  {
+   "type": "sprite",
+   "id": "rocket",
+   "x": 176,
+   "y": 40,
+   "palette": {
+    "r": "red",
+    "w": "white",
+    "b": "blue",
+    "y": "yellow",
+    "o": "orange"
+   },
+   "frames": [
+    [
+     "..rr..",
+     ".rrrr.",
+     ".wwww.",
+     ".wbbw.",
+     ".wbbw.",
+     ".wwww.",
+     ".wwww.",
+     "rwwwwr",
+     "rwwwwr",
+     "rr..rr",
+     "..yy..",
+     "..oo..",
+     "......"
+    ],
+    [
+     "..rr..",
+     ".rrrr.",
+     ".wwww.",
+     ".wbbw.",
+     ".wbbw.",
+     ".wwww.",
+     ".wwww.",
+     "rwwwwr",
+     "rwwwwr",
+     "rr..rr",
+     ".yyyy.",
+     ".oooo.",
+     "..oo.."
+    ]
+   ]
+  }
+ ],
+ "timeline": [
+  {
+   "at": 0.0,
+   "action": "cycle",
+   "target": "rocket",
+   "frames": [
+    0,
+    1
+   ],
+   "every": 0.12,
+   "dur": 4.0
+  },
+  {
+   "at": 0.2,
+   "action": "pose",
+   "pose": "look_r",
+   "dur": 0.4
+  },
+  {
+   "at": 0.7,
+   "action": "pose",
+   "pose": "crouch",
+   "dur": 0.25
+  },
+  {
+   "at": 1.0,
+   "action": "pose",
+   "pose": "cheer",
+   "dur": 0.25
+  },
+  {
+   "at": 1.0,
+   "action": "move",
+   "target": "rocket",
+   "dy": -34,
+   "dur": 1.1,
+   "ease": "power2.in"
+  },
+  {
+   "at": 2.2,
+   "action": "disappear",
+   "target": "rocket",
+   "fade": 0.15
+  },
+  {
+   "at": 2.4,
+   "action": "move",
+   "target": "rocket",
+   "dy": 34,
+   "dur": 0.01
+  },
+  {
+   "at": 2.9,
+   "action": "appear",
+   "target": "rocket",
+   "fade": 0.2
+  },
+  {
+   "at": 3.0,
+   "action": "pose",
+   "pose": "rest",
+   "dur": 0.4
+  },
+  {
+   "at": 3.5,
+   "action": "blink",
+   "hold": 0.2
+  }
+ ],
+ "overlap_ok": [
+  [
+   "pad",
+   "rocket"
+  ]
+ ]
+}

@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>bake</title></head>
+<body>
+<svg id="scene" xmlns="http://www.w3.org/2000/svg"><defs></defs></svg>
+<pre id="out"></pre>
+<script src="vendor/gsap.min.js"></script>
+<script src="clawd.js"></script>
+<script src="parts/props.js"></script>
+<script src="parts/actions.js"></script>
+<script src="render.js"></script>
+<script>
+  // Used by bake_svg.py: samples the GSAP timeline of a scene at `fps` and prints the state of every element as JSON.
+  // ?src=<scene url>&fps=60
+  (async () => { try {
+    const q = new URLSearchParams(location.search);
+    const fps = parseFloat(q.get("fps") || "60");
+    const spec = await (await fetch(q.get("src"))).json();
+    const svg = document.getElementById("scene");
+    const tl = Clawd.render(svg, spec);
+    tl.pause(0);
+    const els = [...svg.querySelectorAll("rect,g")].filter((e) => !e.closest("defs"));
+    els.forEach((e, i) => e.setAttribute("data-b", i));
+    const geom = (e) => e.tagName === "rect" ? ["x", "y", "width", "height"].map((a) => parseFloat(e.getAttribute(a))) : null;
+    const base = els.map(geom);
+    const N = Math.round(spec.loop * fps);
+    const raw = els.map(() => ({ m: [], o: [], f: [] }));
+    for (let k = 0; k < N; k++) {
+      tl.pause(k / fps);
+      els.forEach((e, i) => {
+        const cs = getComputedStyle(e);
+        const tr = e.transform.baseVal.consolidate();
+        let M = tr ? new DOMMatrix([tr.matrix.a, tr.matrix.b, tr.matrix.c, tr.matrix.d, tr.matrix.e, tr.matrix.f]) : new DOMMatrix();
+        const g = geom(e), b = base[i];
+        if (g && b && (g[0] !== b[0] || g[1] !== b[1] || g[2] !== b[2] || g[3] !== b[3])) {
+          // geometry attributes tweened (arm bridges): express as an affine on the original rect
+          const sx = b[2] ? g[2] / b[2] : 1, sy = b[3] ? g[3] / b[3] : 1;
+          M = M.multiply(new DOMMatrix([sx, 0, 0, sy, g[0] - sx * b[0], g[1] - sy * b[1]]));
+        }
+        const op = cs.display === "none" ? 0 : parseFloat(cs.opacity);
+        raw[i].m.push([M.a, M.b, M.c, M.d, M.e, M.f].map((v) => +v.toFixed(4)));
+        raw[i].o.push(+op.toFixed(3));
+        raw[i].f.push(e.tagName === "rect" ? cs.fill : null);
+      });
+    }
+    // Hard steps (frame swap, key flash): find the exact instant of each by bisection between the two samples around it,
+    // so the baked keyframes flip when GSAP does (not at the middle of a 1/60 s interval).
+    const colorOf = (c) => (c || "").match(/[\d.]+/g)?.slice(0, 3).map(Number) || [0, 0, 0];
+    const state = (e) => { const cs = getComputedStyle(e); return { o: cs.display === "none" ? 0 : parseFloat(cs.opacity), f: e.tagName === "rect" ? colorOf(cs.fill) : null }; };
+    const jumpTimes = els.map(() => ({}));
+    els.forEach((e, i) => {
+      const r = raw[i];
+      for (let j = 1; j < N; j++) {
+        const dO = Math.abs(r.o[j] - r.o[j - 1]);
+        const dF = r.f[j] ? Math.max(...colorOf(r.f[j]).map((v, c) => Math.abs(v - colorOf(r.f[j - 1])[c]))) : 0;
+        if (dO <= 0.5 && dF <= 100) continue;
+        const useO = dO > 0.5, oldO = r.o[j - 1], oldF = colorOf(r.f[j - 1]);
+        let lo = (j - 1) / fps, hi = j / fps;
+        for (let it = 0; it < 14; it++) {
+          const mid = (lo + hi) / 2;
+          tl.pause(mid);
+          const st = state(e);
+          const stillOld = useO ? Math.abs(st.o - oldO) < 0.25 : Math.max(...st.f.map((v, c) => Math.abs(v - oldF[c]))) < 50;
+          if (stillOld) lo = mid; else hi = mid;
+        }
+        jumpTimes[i][j] = hi;
+      }
+    });
+    tl.pause(0);
+    // Send full series only for elements whose state changes; constants as a single value.
+    const same = (arr) => arr.every((v) => JSON.stringify(v) === JSON.stringify(arr[0]));
+    const data = raw.map((r) => ({
+      m: same(r.m) ? null : r.m, m0: r.m[0],
+      o: same(r.o) ? null : r.o, o0: r.o[0],
+      f: same(r.f) ? null : r.f, f0: r.f[0],
+      jt: jumpTimes[raw.indexOf(r)],
+    }));
+    tl.pause(0);
+    // static markup: strip what GSAP wrote (style/transform/opacity); the baked CSS replaces it
+    const clone = svg.cloneNode(true);
+    const out = {
+      loop: spec.loop, fps, n: N, canvas: spec.canvas, name: spec.name,
+      svg: clone.innerHTML, data,
+      tags: els.map((e) => e.tagName),
+    };
+    document.getElementById("out").textContent = JSON.stringify(out);
+    document.title = "done";
+  } catch (err) { document.getElementById("out").textContent = "ERROR: " + err.message + " " + (err.stack || ""); document.title = "error"; } })();
+</script>
+</body>
+</html>

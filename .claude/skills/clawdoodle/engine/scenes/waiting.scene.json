@@ -1,0 +1,150 @@
+{
+ "name": "Waiting",
+ "meta": {
+  "topic": "waiting / loading",
+  "metaphor": "hourglass drains while Clawd looks up, then it flips"
+ },
+ "canvas": {
+  "w": 232,
+  "h": 122
+ },
+ "loop": 4.2,
+ "clawd": {
+  "x": 14,
+  "y": 26
+ },
+ "props": [
+  {
+   "type": "sprite",
+   "id": "glass",
+   "x": 150,
+   "y": 46,
+   "palette": {
+    "b": "brown",
+    "g": "gray",
+    "y": "yellow"
+   },
+   "frames": [
+    [
+     "bbbbbbbbb",
+     ".gyyyyyg.",
+     ".gyyyyyg.",
+     "..gyyyg..",
+     "...gyg...",
+     "...g.g...",
+     "...g.g...",
+     "..g...g..",
+     ".g.....g.",
+     ".g.....g.",
+     "bbbbbbbbb"
+    ],
+    [
+     "bbbbbbbbb",
+     ".g.....g.",
+     ".gyyyyyg.",
+     "..gyyyg..",
+     "...gyg...",
+     "...gyg...",
+     "...g.g...",
+     "..g...g..",
+     ".g.....g.",
+     ".gyyyyyg.",
+     "bbbbbbbbb"
+    ],
+    [
+     "bbbbbbbbb",
+     ".g.....g.",
+     ".g.....g.",
+     "..gyyyg..",
+     "...gyg...",
+     "...gyg...",
+     "...g.g...",
+     "..g...g..",
+     ".gyyyyyg.",
+     ".gyyyyyg.",
+     "bbbbbbbbb"
+    ],
+    [
+     "bbbbbbbbb",
+     ".g.....g.",
+     ".g.....g.",
+     "..g...g..",
+     "...gyg...",
+     "...gyg...",
+     "...g.g...",
+     "..gyyyg..",
+     ".gyyyyyg.",
+     ".gyyyyyg.",
+     "bbbbbbbbb"
+    ],
+    [
+     "bbbbbbbbb",
+     ".g.....g.",
+     ".g.....g.",
+     "..g...g..",
+     "...g.g...",
+     "...g.g...",
+     "...gyg...",
+     "..gyyyg..",
+     ".gyyyyyg.",
+     ".gyyyyyg.",
+     "bbbbbbbbb"
+    ]
+   ]
+  }
+ ],
+ "timeline": [
+  {
+   "at": 0.2,
+   "action": "pose",
+   "pose": "look_up",
+   "dur": 0.4
+  },
+  {
+   "at": 0.3,
+   "action": "cycle",
+   "target": "glass",
+   "frames": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "every": 0.5,
+   "dur": 2.5
+  },
+  {
+   "at": 2.8,
+   "action": "spin",
+   "target": "glass",
+   "turns": 1,
+   "steps": 8,
+   "dur": 0.6
+  },
+  {
+   "at": 2.8,
+   "action": "pose",
+   "pose": "shrug",
+   "dur": 0.3
+  },
+  {
+   "at": 3.5,
+   "action": "pose",
+   "pose": "rest",
+   "dur": 0.4
+  },
+  {
+   "at": 1.4,
+   "action": "blink",
+   "hold": 0.2
+  },
+  {
+   "at": 2.8,
+   "action": "hop",
+   "target": "glass",
+   "h": 12,
+   "dur": 0.6
+  }
+ ]
+}

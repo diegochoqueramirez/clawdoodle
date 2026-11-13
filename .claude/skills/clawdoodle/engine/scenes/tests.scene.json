@@ -1,0 +1,227 @@
+{
+ "name": "Tests",
+ "meta": {
+  "topic": "running tests",
+  "metaphor": "checklist whose boxes turn green one by one"
+ },
+ "canvas": {
+  "w": 232,
+  "h": 122
+ },
+ "loop": 4.4,
+ "clawd": {
+  "x": 14,
+  "y": 26
+ },
+ "props": [
+  {
+   "type": "sprite",
+   "id": "list",
+   "x": 150,
+   "y": 16,
+   "px": 4,
+   "palette": {
+    "b": "brown",
+    "c": "gray",
+    "w": "white",
+    "d": "dark",
+    "l": "light",
+    "g": "green"
+   },
+   "frames": [
+    [
+     "...cccccc...",
+     "bbbbbbbbbbbb",
+     "bwwwwwwwwwwb",
+     "bwddddwwwwwb",
+     "bwdwwdwllllb",
+     "bwdwwdwwwwwb",
+     "bwddddwwwwwb",
+     "bwwwwwwwwwwb",
+     "bwddddwwwwwb",
+     "bwdwwdwllllb",
+     "bwdwwdwwwwwb",
+     "bwddddwwwwwb",
+     "bwwwwwwwwwwb",
+     "bwddddwwwwwb",
+     "bwdwwdwllllb",
+     "bwdwwdwwwwwb",
+     "bwddddwwwwwb",
+     "bwwwwwwwwwwb",
+     "bwddddwwwwwb",
+     "bwdwwdwllllb",
+     "bwdwwdwwwwwb",
+     "bwddddwwwwwb",
+     "bwwwwwwwwwwb",
+     "bbbbbbbbbbbb"
+    ],
+    [
+     "...cccccc...",
+     "bbbbbbbbbbbb",
+     "bwwwwwwwwwwb",
+     "bwddddwwwwwb",
+     "bwdggdwllllb",
+     "bwdggdwwwwwb",
+     "bwddddwwwwwb",
+     "bwwwwwwwwwwb",
+     "bwddddwwwwwb",
+     "bwdwwdwllllb",
+     "bwdwwdwwwwwb",
+     "bwddddwwwwwb",
+     "bwwwwwwwwwwb",
+     "bwddddwwwwwb",
+     "bwdwwdwllllb",
+     "bwdwwdwwwwwb",
+     "bwddddwwwwwb",
+     "bwwwwwwwwwwb",
+     "bwddddwwwwwb",
+     "bwdwwdwllllb",
+     "bwdwwdwwwwwb",
+     "bwddddwwwwwb",
+     "bwwwwwwwwwwb",
+     "bbbbbbbbbbbb"
+    ],
+    [
+     "...cccccc...",
+     "bbbbbbbbbbbb",
+     "bwwwwwwwwwwb",
+     "bwddddwwwwwb",
+     "bwdggdwllllb",
+     "bwdggdwwwwwb",
+     "bwddddwwwwwb",
+     "bwwwwwwwwwwb",
+     "bwddddwwwwwb",
+     "bwdggdwllllb",
+     "bwdggdwwwwwb",
+     "bwddddwwwwwb",
+     "bwwwwwwwwwwb",
+     "bwddddwwwwwb",
+     "bwdwwdwllllb",
+     "bwdwwdwwwwwb",
+     "bwddddwwwwwb",
+     "bwwwwwwwwwwb",
+     "bwddddwwwwwb",
+     "bwdwwdwllllb",
+     "bwdwwdwwwwwb",
+     "bwddddwwwwwb",
+     "bwwwwwwwwwwb",
+     "bbbbbbbbbbbb"
+    ],
+    [
+     "...cccccc...",
+     "bbbbbbbbbbbb",
+     "bwwwwwwwwwwb",
+     "bwddddwwwwwb",
+     "bwdggdwllllb",
+     "bwdggdwwwwwb",
+     "bwddddwwwwwb",
+     "bwwwwwwwwwwb",
+     "bwddddwwwwwb",
+     "bwdggdwllllb",
+     "bwdggdwwwwwb",
+     "bwddddwwwwwb",
+     "bwwwwwwwwwwb",
+     "bwddddwwwwwb",
+     "bwdggdwllllb",
+     "bwdggdwwwwwb",
+     "bwddddwwwwwb",
+     "bwwwwwwwwwwb",
+     "bwddddwwwwwb",
+     "bwdwwdwllllb",
+     "bwdwwdwwwwwb",
+     "bwddddwwwwwb",
+     "bwwwwwwwwwwb",
+     "bbbbbbbbbbbb"
+    ],
+    [
+     "...cccccc...",
+     "bbbbbbbbbbbb",
+     "bwwwwwwwwwwb",
+     "bwddddwwwwwb",
+     "bwdggdwllllb",
+     "bwdggdwwwwwb",
+     "bwddddwwwwwb",
+     "bwwwwwwwwwwb",
+     "bwddddwwwwwb",
+     "bwdggdwllllb",
+     "bwdggdwwwwwb",
+     "bwddddwwwwwb",
+     "bwwwwwwwwwwb",
+     "bwddddwwwwwb",
+     "bwdggdwllllb",
+     "bwdggdwwwwwb",
+     "bwddddwwwwwb",
+     "bwwwwwwwwwwb",
+     "bwddddwwwwwb",
+     "bwdggdwllllb",
+     "bwdggdwwwwwb",
+     "bwddddwwwwwb",
+     "bwwwwwwwwwwb",
+     "bbbbbbbbbbbb"
+    ]
+   ]
+  }
+ ],
+ "timeline": [
+  {
+   "at": 0.2,
+   "action": "pose",
+   "pose": "look_r",
+   "dur": 0.4
+  },
+  {
+   "at": 0.9,
+   "action": "swap",
+   "target": "list",
+   "frame": 1
+  },
+  {
+   "at": 1.4,
+   "action": "swap",
+   "target": "list",
+   "frame": 2
+  },
+  {
+   "at": 1.9,
+   "action": "swap",
+   "target": "list",
+   "frame": 3
+  },
+  {
+   "at": 2.4,
+   "action": "swap",
+   "target": "list",
+   "frame": 4
+  },
+  {
+   "at": 2.4,
+   "action": "pulse",
+   "target": "list",
+   "scale": 1.06,
+   "dur": 0.3
+  },
+  {
+   "at": 2.45,
+   "action": "pose",
+   "pose": "cheer",
+   "dur": 0.3
+  },
+  {
+   "at": 3.3,
+   "action": "pose",
+   "pose": "rest",
+   "dur": 0.4
+  },
+  {
+   "at": 3.6,
+   "action": "swap",
+   "target": "list",
+   "frame": 0
+  },
+  {
+   "at": 1.2,
+   "action": "blink",
+   "hold": 0.2
+  }
+ ]
+}

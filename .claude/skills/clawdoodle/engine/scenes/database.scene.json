@@ -1,0 +1,149 @@
+{
+ "name": "Database",
+ "meta": {
+  "topic": "what a database is",
+  "metaphor": "filing cabinet: a drawer opens and a record card pops out"
+ },
+ "canvas": {
+  "w": 224,
+  "h": 116
+ },
+ "loop": 4.0,
+ "clawd": {
+  "x": 10,
+  "y": 20
+ },
+ "props": [
+  {
+   "type": "sprite",
+   "id": "cabinet",
+   "x": 150,
+   "y": 22,
+   "palette": {
+    "d": "dark",
+    "s": "steel",
+    "g": "gray",
+    "l": "light",
+    "i": "ink"
+   },
+   "frames": [
+    [
+     "dddddddddd",
+     "dssssssssd",
+     "dsggggggsd",
+     "dsgglllgsd",
+     "dsggggggsd",
+     "dssssssssd",
+     "dsggggggsd",
+     "dsgglllgsd",
+     "dsggggggsd",
+     "dssssssssd",
+     "dsggggggsd",
+     "dsgglllgsd",
+     "dsggggggsd",
+     "dddddddddd"
+    ],
+    [
+     "dddddddddd",
+     "dssssssssd",
+     "dsiiiiiisd",
+     "dsggggggsd",
+     "dsgglllgsd",
+     "dsggggggsd",
+     "dsggggggsd",
+     "dsgglllgsd",
+     "dsggggggsd",
+     "dssssssssd",
+     "dsggggggsd",
+     "dsgglllgsd",
+     "dsggggggsd",
+     "dddddddddd"
+    ]
+   ]
+  },
+  {
+   "type": "sprite",
+   "id": "card",
+   "x": 165,
+   "y": 32,
+   "hidden": true,
+   "layer": "front",
+   "palette": {
+    "p": "paper",
+    "r": "red",
+    "g": "gray"
+   },
+   "rows": [
+    ".rrr.",
+    "ggggg",
+    "gpppg",
+    "gpppg",
+    "ggggg"
+   ]
+  }
+ ],
+ "timeline": [
+  {
+   "at": 0.3,
+   "action": "pose",
+   "pose": "point_r",
+   "dur": 0.5
+  },
+  {
+   "at": 1.0,
+   "action": "swap",
+   "target": "cabinet",
+   "frame": 1
+  },
+  {
+   "at": 1.05,
+   "action": "appear",
+   "target": "card"
+  },
+  {
+   "at": 1.15,
+   "action": "move",
+   "target": "card",
+   "dy": -26,
+   "dur": 0.5,
+   "ease": "power2.out",
+   "back": true,
+   "hold": 0.8
+  },
+  {
+   "at": 1.3,
+   "action": "pulse",
+   "target": "card",
+   "scale": 1.1,
+   "dur": 0.3
+  },
+  {
+   "at": 3.0,
+   "action": "swap",
+   "target": "cabinet",
+   "frame": 0
+  },
+  {
+   "at": 3.0,
+   "action": "disappear",
+   "target": "card"
+  },
+  {
+   "at": 3.1,
+   "action": "pose",
+   "pose": "rest",
+   "dur": 0.4
+  },
+  {
+   "at": 3.6,
+   "action": "blink",
+   "hold": 0.22
+  }
+ ],
+ "overlap_ok": [
+  [
+   "cabinet",
+   "card"
+  ]
+ ]
+}

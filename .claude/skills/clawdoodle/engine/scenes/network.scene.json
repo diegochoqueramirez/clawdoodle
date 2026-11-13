@@ -1,0 +1,146 @@
+{
+ "name": "Network",
+ "meta": {
+  "topic": "sending a request / API",
+  "metaphor": "an envelope travels to a mailbox and the flag goes up"
+ },
+ "canvas": {
+  "w": 232,
+  "h": 122
+ },
+ "loop": 4.2,
+ "clawd": {
+  "x": 14,
+  "y": 26
+ },
+ "props": [
+  {
+   "type": "sprite",
+   "id": "box",
+   "x": 176,
+   "y": 46,
+   "palette": {
+    "b": "blue",
+    "d": "dark",
+    "p": "brown",
+    "r": "red"
+   },
+   "frames": [
+    [
+     "..bbbb..",
+     ".bbbbbb.",
+     "bbbbbbbb",
+     "bbddddbb",
+     "bbbbbbbb",
+     "bbbbbbbr",
+     "..pp....",
+     "..pp....",
+     "..pp....",
+     "..pp....",
+     "..pp...."
+    ],
+    [
+     "..bbbbbr",
+     ".bbbbbbr",
+     "bbbbbbbb",
+     "bbddddbb",
+     "bbbbbbbb",
+     "bbbbbbbb",
+     "..pp....",
+     "..pp....",
+     "..pp....",
+     "..pp....",
+     "..pp...."
+    ]
+   ]
+  },
+  {
+   "type": "sprite",
+   "id": "mail",
+   "x": 130,
+   "y": 50,
+   "hidden": true,
+   "layer": "front",
+   "palette": {
+    "g": "gray",
+    "p": "paper",
+    "r": "red"
+   },
+   "rows": [
+    "ggggggggg",
+    "ggpppppgg",
+    "gpgpppgpg",
+    "gppgpgppg",
+    "gppprpppg",
+    "ggggggggg"
+   ],
+   "px": 5
+  }
+ ],
+ "timeline": [
+  {
+   "at": 0.2,
+   "action": "pose",
+   "pose": "look_r",
+   "dur": 0.4
+  },
+  {
+   "at": 0.5,
+   "action": "appear",
+   "target": "mail",
+   "fade": 0.1
+  },
+  {
+   "at": 0.7,
+   "action": "move",
+   "target": "mail",
+   "dx": 46,
+   "dy": 4,
+   "dur": 1.0,
+   "ease": "power1.inOut",
+   "back": true,
+   "hold": 1.0
+  },
+  {
+   "at": 1.75,
+   "action": "disappear",
+   "target": "mail"
+  },
+  {
+   "at": 1.8,
+   "action": "swap",
+   "target": "box",
+   "frame": 1
+  },
+  {
+   "at": 1.8,
+   "action": "pulse",
+   "target": "box",
+   "scale": 1.08,
+   "dur": 0.3
+  },
+  {
+   "at": 1.9,
+   "action": "pose",
+   "pose": "cheer",
+   "dur": 0.3
+  },
+  {
+   "at": 3.0,
+   "action": "pose",
+   "pose": "rest",
+   "dur": 0.4
+  },
+  {
+   "at": 3.0,
+   "action": "swap",
+   "target": "box",
+   "frame": 0
+  },
+  {
+   "at": 3.5,
+   "action": "blink",
+   "hold": 0.2
+  }
+ ]
+}

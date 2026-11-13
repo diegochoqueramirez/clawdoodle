@@ -1,0 +1,319 @@
+{
+  "_comment": "Single list of what a scene may use. validate_scene.py reads it; --selftest checks it against the JS engine so they cannot drift.",
+  "palette": {
+    "body": "#DD775B",
+    "ink": "#1A1A1A",
+    "white": "#F7F4EE",
+    "paper": "#F2EBDD",
+    "light": "#C9C5BD",
+    "gray": "#8C8C8C",
+    "steel": "#5E5E5E",
+    "dark": "#3A3A3A",
+    "brown": "#8A6340",
+    "red": "#E5484D",
+    "orange": "#F2994A",
+    "yellow": "#F5C542",
+    "green": "#3DDC6E",
+    "mint": "#7CFF9B",
+    "teal": "#3CB8B0",
+    "sky": "#9CCBF2",
+    "blue": "#4C8DF6",
+    "purple": "#9B6DF0",
+    "pink": "#F28BB8",
+    "screen": "#0D1A12",
+    "rose": "#F29B9B",
+    "forest": "#2F8F5B",
+    "navy": "#2D4A8A",
+    "silver": "#B0B0B0"
+  },
+  "poses": {
+    "rest": {
+      "reach": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "lean": {
+      "reach": [
+        0,
+        12,
+        0,
+        0
+      ]
+    },
+    "look_l": {
+      "reach": [
+        2,
+        0,
+        0,
+        0
+      ]
+    },
+    "look_r": {
+      "reach": [
+        0,
+        2,
+        0,
+        0
+      ]
+    },
+    "look_up": {
+      "reach": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "wave": {
+      "reach": [
+        0,
+        6,
+        28,
+        0
+      ]
+    },
+    "point_r": {
+      "reach": [
+        0,
+        14,
+        6,
+        0
+      ]
+    },
+    "think": {
+      "reach": [
+        2,
+        4,
+        22,
+        0
+      ]
+    },
+    "shrug": {
+      "reach": [
+        4,
+        4,
+        14,
+        0
+      ]
+    },
+    "cheer": {
+      "reach": [
+        2,
+        2,
+        34,
+        0
+      ]
+    },
+    "crouch": {
+      "reach": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "sad": {
+      "reach": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "relief": {
+      "reach": [
+        0,
+        2,
+        0,
+        0
+      ]
+    },
+    "hold_r": {
+      "reach": [
+        0,
+        12,
+        4,
+        0
+      ]
+    }
+  },
+  "props": {
+    "desk": {
+      "required": [
+        "x",
+        "y"
+      ]
+    },
+    "keyboard": {
+      "required": [
+        "x",
+        "y"
+      ]
+    },
+    "crt": {
+      "required": [
+        "x",
+        "y"
+      ]
+    },
+    "sprite": {
+      "required": [
+        "x",
+        "y"
+      ],
+      "one_of": [
+        "rows",
+        "frames"
+      ]
+    }
+  },
+  "actions": {
+    "pose": {
+      "required": [
+        "pose"
+      ]
+    },
+    "wave": {
+      "required": []
+    },
+    "type": {
+      "required": [
+        "target",
+        "taps"
+      ],
+      "target_kind": [
+        "keyboard"
+      ]
+    },
+    "blink": {
+      "required": []
+    },
+    "scroll": {
+      "required": [
+        "target"
+      ],
+      "target_kind": [
+        "crt"
+      ]
+    },
+    "cursor": {
+      "required": [
+        "target"
+      ],
+      "target_kind": [
+        "crt"
+      ]
+    },
+    "move": {
+      "required": [
+        "target"
+      ],
+      "target_kind": [
+        "any"
+      ]
+    },
+    "moveTo": {
+      "required": [
+        "target"
+      ],
+      "target_kind": [
+        "any"
+      ]
+    },
+    "hop": {
+      "required": [
+        "target"
+      ],
+      "target_kind": [
+        "any"
+      ]
+    },
+    "shake": {
+      "required": [
+        "target"
+      ],
+      "target_kind": [
+        "any"
+      ]
+    },
+    "bob": {
+      "required": [
+        "target"
+      ],
+      "target_kind": [
+        "any"
+      ]
+    },
+    "pulse": {
+      "required": [
+        "target"
+      ],
+      "target_kind": [
+        "any"
+      ]
+    },
+    "appear": {
+      "required": [
+        "target"
+      ],
+      "target_kind": [
+        "any"
+      ]
+    },
+    "disappear": {
+      "required": [
+        "target"
+      ],
+      "target_kind": [
+        "any"
+      ]
+    },
+    "swap": {
+      "required": [
+        "target",
+        "frame"
+      ],
+      "target_kind": [
+        "sprite"
+      ]
+    },
+    "cycle": {
+      "required": [
+        "target",
+        "frames",
+        "every"
+      ],
+      "target_kind": [
+        "sprite"
+      ]
+    },
+    "spin": {
+      "required": [
+        "target"
+      ],
+      "target_kind": [
+        "any"
+      ]
+    },
+    "recolor": {
+      "required": [
+        "target",
+        "map"
+      ],
+      "target_kind": [
+        "sprite"
+      ]
+    }
+  },
+  "limits": {
+    "canvas_max": 400,
+    "loop_min": 1,
+    "loop_max": 8,
+    "sprite_cells_max": 1400,
+    "sprite_dim_max": 40,
+    "margin": 2
+  }
+}

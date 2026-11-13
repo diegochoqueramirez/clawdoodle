@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>svg check</title>
+<style>html,body{margin:0;background:transparent;overflow:hidden}svg{display:block;width:100vw;height:100vh}</style></head>
+<body><div id="host"></div>
+<script>
+  // Used by bake_svg.py --verify: inlines a baked SVG and freezes its CSS animations at ?t=<seconds>.
+  const q = new URLSearchParams(location.search);
+  fetch(q.get("svg")).then((r) => r.text()).then((txt) => {
+    document.getElementById("host").innerHTML = txt;
+    const t = parseFloat(q.get("t")) * 1000;
+    document.getAnimations().forEach((a) => { a.pause(); a.currentTime = t; });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+{
+ "name": "Searching",
+ "meta": {
+  "topic": "searching through files",
+  "metaphor": "magnifying glass sweeps three documents and the right one lights up"
+ },
+ "canvas": {
+  "w": 252,
+  "h": 122
+ },
+ "loop": 4.0,
+ "clawd": {
+  "x": 14,
+  "y": 26
+ },
+ "props": [
+  {
+   "type": "sprite",
+   "id": "files",
+   "x": 132,
+   "y": 72,
+   "px": 5,
+   "palette": {
+    "g": "gray",
+    "w": "white",
+    "l": "light",
+    "y": "yellow"
+   },
+   "frames": [
+    [
+     "gggggg.gggggg.gggggg",
+     "gwwwwg.gwwwwg.gwwwwg",
+     "gwllwg.gwllwg.gwllwg",
+     "gwwwwg.gwwwwg.gwwwwg",
+     "gwllwg.gwllwg.gwllwg",
+     "gwwwwg.gwwwwg.gwwwwg",
+     "gwllwg.gwllwg.gwllwg",
+     "gggggg.gggggg.gggggg"
+    ],
+    [
+     "gggggg.gggggg.gggggg",
+     "gwwwwg.gwwwwg.gyyyyg",
+     "gwllwg.gwllwg.gyllyg",
+     "gwwwwg.gwwwwg.gyyyyg",
+     "gwllwg.gwllwg.gyllyg",
+     "gwwwwg.gwwwwg.gyyyyg",
+     "gwllwg.gwllwg.gyllyg",
+     "gggggg.gggggg.gggggg"
+    ]
+   ]
+  },
+  {
+   "type": "sprite",
+   "id": "lens",
+   "x": 126,
+   "y": 64,
+   "px": 5,
+   "layer": "front",
+   "palette": {
+    "o": "dark",
+    "h": "brown"
+   },
+   "rows": [
+    "..oooooo..",
+    ".o......o.",
+    "o........o",
+    "o........o",
+    "o........o",
+    "o........o",
+    ".o......o.",
+    "..oooooo..",
+    "....hh....",
+    "....hh...."
+   ]
+  }
+ ],
+ "timeline": [
+  {
+   "at": 0.2,
+   "action": "pose",
+   "pose": "look_r",
+   "dur": 0.4
+  },
+  {
+   "at": 0.6,
+   "action": "move",
+   "target": "lens",
+   "dx": 68,
+   "dur": 1.4,
+   "ease": "power1.inOut",
+   "back": true,
+   "hold": 0.4
+  },
+  {
+   "at": 2.0,
+   "action": "swap",
+   "target": "files",
+   "frame": 1
+  },
+  {
+   "at": 2.0,
+   "action": "pulse",
+   "target": "lens",
+   "scale": 1.1,
+   "dur": 0.3
+  },
+  {
+   "at": 2.0,
+   "action": "pose",
+   "pose": "cheer",
+   "dur": 0.3
+  },
+  {
+   "at": 3.0,
+   "action": "pose",
+   "pose": "rest",
+   "dur": 0.4
+  },
+  {
+   "at": 3.2,
+   "action": "swap",
+   "target": "files",
+   "frame": 0
+  },
+  {
+   "at": 3.5,
+   "action": "blink",
+   "hold": 0.2
+  }
+ ],
+ "overlap_ok": [
+  [
+   "files",
+   "lens"
+  ]
+ ]
+}
