@@ -22,7 +22,7 @@ EPS = {"m": [0.002, 0.002, 0.002, 0.002, 0.03, 0.03], "o": 0.02, "f": 1.5}
 
 
 def run_bake(chrome, scene_path, fps):
-    url = f"file://{HERE}/bake.html?src={scene_path.as_uri()}&fps={fps}"
+    url = f"{Path(HERE).as_uri()}/bake.html?src={scene_path.as_uri()}&fps={fps}"
     r = subprocess.run([chrome, "--headless=new", "--disable-gpu", "--allow-file-access-from-files",
                         "--virtual-time-budget=30000", "--dump-dom", url], capture_output=True, text=True, timeout=180)
     m = re.search(r'<pre id="out">(.*?)</pre>', r.stdout, re.S)
@@ -169,7 +169,7 @@ def verify(svg_path, scene_path, chrome, data, scale):
             t = loop * k / 9
             a, b = os.path.join(tmp, f"g{k}.png"), os.path.join(tmp, f"s{k}.png")
             X.capture(chrome, scene_path, t, (W, H), a)
-            url = f"file://{HERE}/svg_check.html?svg={Path(svg_path).resolve().as_uri()}&t={t:.4f}"
+            url = f"{Path(HERE).as_uri()}/svg_check.html?svg={Path(svg_path).resolve().as_uri()}&t={t:.4f}"
             subprocess.run([chrome, "--headless=new", "--disable-gpu", "--hide-scrollbars", "--default-background-color=00000000",
                             "--allow-file-access-from-files", f"--window-size={W},{H}", "--virtual-time-budget=4000",
                             f"--screenshot={b}", url], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=60)
@@ -186,13 +186,13 @@ def main():
     ap.add_argument("--scale", type=int, default=4); ap.add_argument("--verify", action="store_true")
     a = ap.parse_args()
     scene_path = X.resolve_scene(a.scene)
-    spec = json.loads(scene_path.read_text())
+    spec = json.loads(scene_path.read_text(encoding="utf-8"))
     chrome = X.find_chrome()
     data = run_bake(chrome, scene_path, a.fps)
     svg, animated, removed = build(data, a.scale)
     out = Path(a.out) if a.out else Path.cwd() / "clawd-out" / f"Clawd-{spec['name']}.svg"
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(svg)
+    out.write_text(svg, encoding="utf-8")
     print(f"{out}: {len(svg) / 1024:.0f} KB, {animated} animated elements, {removed} never-visible elements dropped, {data['n']} samples @ {a.fps:g} fps")
     if a.verify:
         res = verify(out, scene_path, chrome, data, a.scale)

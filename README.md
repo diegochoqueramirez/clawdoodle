@@ -16,8 +16,8 @@ A [Claude Code](https://claude.com/claude-code) skill that turns a topic into a 
 
 ## Requirements
 
-- macOS or Linux, Python 3.9+
-- Google Chrome (used headless to render the SVG/GSAP scenes)
+- macOS, Linux or Windows 10/11, Python 3.9+
+- Google Chrome or Chromium (used headless; set `CHROME_PATH` if it is installed somewhere unusual)
 - [Claude Code](https://claude.com/claude-code)
 - Pillow (installed automatically by the setup script)
 
@@ -28,7 +28,7 @@ A [Claude Code](https://claude.com/claude-code) skill that turns a topic into a 
 ```bash
 git clone https://github.com/diegochoqueramirez/clawdoodle.git
 cd clawdoodle
-.claude/skills/clawdoodle/scripts/setup.sh
+.claude/skills/clawdoodle/scripts/setup.sh   # Windows: py .claude\skills\clawdoodle\scripts\setup.py
 claude
 ```
 
@@ -43,7 +43,18 @@ cp -R clawdoodle/.claude/skills/clawdoodle ~/.claude/skills/clawdoodle
 ~/.claude/skills/clawdoodle/scripts/setup.sh
 ```
 
-`setup.sh` creates `engine/.venv` with Pillow, checks for Chrome and runs `clawd doctor`. It must finish with `OK`.
+On Windows (PowerShell):
+
+```powershell
+git clone https://github.com/diegochoqueramirez/clawdoodle.git
+New-Item -ItemType Directory -Force $HOME\.claude\skills | Out-Null
+Copy-Item -Recurse clawdoodle\.claude\skills\clawdoodle $HOME\.claude\skills\clawdoodle
+py $HOME\.claude\skills\clawdoodle\scripts\setup.py
+```
+
+> Windows support is implemented (cross-platform launcher, UTF-8 file I/O, `file:///` URLs, Chrome path lookup) but was only tested on macOS so far. If something fails on Windows, please open an issue.
+
+The setup script creates `engine/.venv` with Pillow, checks for Chrome and runs `clawd doctor`. It must finish with `OK`.
 
 ## Use
 
@@ -66,7 +77,7 @@ Claude picks one visual metaphor, builds the scene, checks it, renders a preview
     VOCAB.md      what a scene may contain (props, poses, actions)
     STYLE.md      art and timing rules
   reviewer/       checklist and brief for the optional reviewer agent
-  scripts/setup.sh
+  scripts/       setup.py / setup.sh / setup.ps1 (one-time setup), run.py (launcher)
 ```
 
 A scene is a small JSON file: pixel-grid sprites with named colors plus a timeline of poses and actions. The engine validates it, renders it in headless Chrome and exports the GIF; the SVG is baked from the GSAP timeline sampled at 60 fps and checked against the GIF render (`clawd export-svg --verify`).
@@ -74,13 +85,13 @@ A scene is a small JSON file: pixel-grid sprites with named colors plus a timeli
 ### CLI (what the skill runs for you)
 
 ```bash
-clawd() { .claude/skills/clawdoodle/engine/.venv/bin/python .claude/skills/clawdoodle/engine/clawd.py "$@"; }
-clawd new my-topic --from thinking   # start from an example
-clawd check my-topic                 # validate
-clawd render my-topic                # preview + review pack
-clawd render my-topic --final        # GIF + animated SVG
-clawd save my-topic -m "first version"
-clawd --help
+# launcher: python3 .claude/skills/clawdoodle/scripts/run.py <command>   (Windows: py ...\run.py <command>)
+python3 .claude/skills/clawdoodle/scripts/run.py new my-topic --from thinking   # start from an example
+python3 .claude/skills/clawdoodle/scripts/run.py check my-topic                 # validate
+python3 .claude/skills/clawdoodle/scripts/run.py render my-topic                # preview + review pack
+python3 .claude/skills/clawdoodle/scripts/run.py render my-topic --final        # GIF + animated SVG
+python3 .claude/skills/clawdoodle/scripts/run.py save my-topic -m "first version"
+python3 .claude/skills/clawdoodle/scripts/run.py --help
 ```
 
 See [docs/design.md](docs/design.md) for the design notes (in Spanish).

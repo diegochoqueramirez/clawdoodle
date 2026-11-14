@@ -98,7 +98,7 @@ def write_sprite(scene_path, sprite_id, palette, rows=None, frames=None, x=0, y=
     """Insert or replace a sprite prop in a scene.json (keeps everything else). `extra` may hold hidden=True, layer="front", clone_of="id"...
     Returns the sprite's size in scene units (w, h)."""
     import json
-    with open(scene_path) as f:
+    with open(scene_path, encoding="utf-8") as f:
         spec = json.load(f)
     prop = {"type": "sprite", "id": sprite_id, "x": x, "y": y, "px": px, "palette": palette}
     if frames is not None:
@@ -113,7 +113,7 @@ def write_sprite(scene_path, sprite_id, palette, rows=None, frames=None, x=0, y=
             break
     else:
         props.append(prop)
-    with open(scene_path, "w") as f:
+    with open(scene_path, "w", encoding="utf-8") as f:
         json.dump(spec, f, indent=1)
     fr = frames[0] if frames is not None else rows
     return len(fr[0]) * px, len(fr) * px

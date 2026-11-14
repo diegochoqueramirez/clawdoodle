@@ -7,7 +7,7 @@ A project lives in ./clawdoodles/<slug>/ (override the base with CLAWD_HOME):
   out/preview.gif, out/final.gif, out/final.svg   renders
   review/                                         review pack for the reviewer agent
 
-Commands (run with engine/.venv/bin/python):
+Commands (run with scripts/run.py):
   new <slug> [--from <example>]   create a project (empty template, or a copy of an example scene)
   list                            projects and how many versions each has
   check <slug>                    validate the scene
@@ -37,6 +37,10 @@ Commands (run with engine/.venv/bin/python):
 import argparse, copy, hashlib, json, os, re, shutil, subprocess, sys, time
 from pathlib import Path
 
+for _s in (sys.stdout, sys.stderr):  # Windows consoles default to a legacy codepage
+    try: _s.reconfigure(encoding="utf-8", errors="replace")
+    except Exception: pass
+
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 import validate_scene as V  # noqa: E402
@@ -59,11 +63,11 @@ def pdir(slug):
 
 
 def load(d):
-    return json.loads((d / "scene.json").read_text())
+    return json.loads((d / "scene.json").read_text(encoding="utf-8"))
 
 
 def dump(d, spec):
-    (d / "scene.json").write_text(json.dumps(spec, indent=1, ensure_ascii=False) + "\n")
+    (d / "scene.json").write_text(json.dumps(spec, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
 def run(cmd, **kw):
@@ -72,7 +76,7 @@ def run(cmd, **kw):
 
 def versions_log(d):
     f = d / "versions" / "log.json"
-    return json.loads(f.read_text()) if f.exists() else []
+    return json.loads(f.read_text(encoding="utf-8")) if f.exists() else []
 
 
 # ---------------------------------------------------------------------------
@@ -86,7 +90,7 @@ def cmd_new(a):
         src = HERE / "scenes" / f"{a.src}.scene.json"
         if not src.exists():
             sys.exit(f"Unknown example '{a.src}'. Available: " + ", ".join(sorted(p.name.split('.')[0] for p in (HERE / 'scenes').glob('*.scene.json'))))
-        spec = json.loads(src.read_text())
+        spec = json.loads(src.read_text(encoding="utf-8"))
         spec["name"] = a.slug.title().replace("-", "")
     else:
         spec = {"name": a.slug.title().replace("-", ""), "meta": {"topic": "", "metaphor": ""},
@@ -106,7 +110,7 @@ def cmd_list(a):
 def cmd_check(a):
     d = pdir(a.slug)
     sha_f = d / "review" / "scene.sha"
-    if sha_f.exists() and sha_f.read_text() != hashlib.sha1((d / "scene.json").read_bytes()).hexdigest()[:10]:
+    if sha_f.exists() and sha_f.read_text(encoding="utf-8") != hashlib.sha1((d / "scene.json").read_bytes()).hexdigest()[:10]:
         print("NOTE: review/ (grid.png ...) was built from an OLDER scene.json: do not trust it, run render again.")
     errs, warns = V.validate_file(d / "scene.json")
     for e in errs: print("ERROR:", e)
@@ -164,8 +168,8 @@ def cmd_review_pack(a):
     total, nf = frames_grid.grid(str(gif), str(rv / "grid.png"), n=16, cols=4)
     errs, warns = V.validate_file(d / "scene.json")
     report += [f"validator: {len(errs)} error(s), {len(warns)} warning(s)"] + [f"  WARN: {w}" for w in warns]
-    (rv / "report.txt").write_text("\n".join(report) + "\n")
-    (rv / "scene.sha").write_text(hashlib.sha1((d / "scene.json").read_bytes()).hexdigest()[:10])
+    (rv / "report.txt").write_text("\n".join(report) + "\n", encoding="utf-8")
+    (rv / "scene.sha").write_text(hashlib.sha1((d / "scene.json").read_bytes()).hexdigest()[:10], encoding="utf-8")
     print("review pack:", rv)
     print("\n".join(report))
     print(f"LOOK at: {rv / 'grid.png'} (whole loop, 16 moments sampled by time), {rv / 'sheet.png'}, {rv / 'zoom-1.png'}, {rv / 'zoom-2.png'}")
@@ -190,7 +194,7 @@ def cmd_save(a):
         shutil.copy(svg, d / "versions" / f"v{n}.svg")   # only when the SVG is as fresh as the GIF (rendered together)
     log.append({"n": n, "time": time.strftime("%Y-%m-%d %H:%M:%S"), "message": a.message or "",
                 "sha": sha, "gif": bool(gifs)})
-    (d / "versions" / "log.json").write_text(json.dumps(log, indent=1))
+    (d / "versions" / "log.json").write_text(json.dumps(log, indent=1), encoding="utf-8")
     print(f"saved v{n}: {a.message or ''}")
 
 
@@ -209,7 +213,7 @@ def _scene(d, ref):
     f = d / "versions" / f"v{n}.scene.json"
     if not f.exists():
         sys.exit(f"No version v{n}")
-    return json.loads(f.read_text())
+    return json.loads(f.read_text(encoding="utf-8"))
 
 
 def summarize_diff(A, B):
@@ -315,7 +319,7 @@ def cmd_remove(a):
 
 
 def _load_templates():
-    return json.loads((HERE / "templates.json").read_text())["templates"]
+    return json.loads((HERE / "templates.json").read_text(encoding="utf-8"))["templates"]
 
 
 def _parse_colors(txt):

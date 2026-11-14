@@ -10,7 +10,7 @@ import json, re, sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-VOCAB = json.loads((HERE / "vocab.json").read_text())
+VOCAB = json.loads((HERE / "vocab.json").read_text(encoding="utf-8"))
 # Clawd geometry in scene units (see clawd.js): hands reach x-8 .. x+114, body top y+12, feet y+86.
 CLAWD = {"l": -8, "r": 114, "top": 12, "bottom": 86, "body": (14, 12, 92, 64)}
 HEX = re.compile(r"^#[0-9a-fA-F]{3,8}$")
@@ -352,7 +352,7 @@ def overlap(a, b):
 
 def validate_file(path):
     try:
-        spec = json.loads(Path(path).read_text())
+        spec = json.loads(Path(path).read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as e:
         return [f"cannot read scene: {e}"], []
     return validate(spec)
@@ -361,7 +361,7 @@ def validate_file(path):
 def selftest():
     """vocab.json must list exactly what the JS engine implements."""
     bad = []
-    js = lambda n: (HERE / n).read_text()
+    js = lambda n: (HERE / n).read_text(encoding="utf-8")
     pose_block = re.search(r"const POSES = \{(.*?)\n  \};", js("parts/actions.js"), re.S).group(1)
     poses = set(re.findall(r"^\s{4}(\w+):", pose_block, re.M))
     actions = set(re.findall(r"^\s{2}actions\.(\w+) =", js("parts/actions.js"), re.M))

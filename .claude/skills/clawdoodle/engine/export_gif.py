@@ -40,7 +40,7 @@ def resolve_scene(arg):
 
 
 def capture(chrome, scene_path, t, size, path):
-    url = f"file://{HERE}/export.html?src={scene_path.as_uri()}&t={t:.4f}"
+    url = f"{Path(HERE).as_uri()}/export.html?src={scene_path.as_uri()}&t={t:.4f}"
     subprocess.run([
         chrome, "--headless=new", "--disable-gpu", "--hide-scrollbars",
         "--default-background-color=00000000", "--allow-file-access-from-files", f"--window-size={size[0]},{size[1]}",
@@ -69,7 +69,7 @@ def main():
         if errs:
             sys.exit(f"Scene has {len(errs)} error(s); fix them or pass --no-validate.")
     chrome = find_chrome()
-    with open(scene_path) as f:
+    with open(scene_path, encoding="utf-8") as f:
         spec = json.load(f)
     LOOP = spec["loop"]
     size = (spec["canvas"]["w"] * a.scale, spec["canvas"]["h"] * a.scale)

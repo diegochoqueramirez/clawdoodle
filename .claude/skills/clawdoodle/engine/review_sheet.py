@@ -89,7 +89,7 @@ def main():
     lines.append(f"character-only frame change: median {sorted(cd)[len(cd) // 2]} px, max {max(cd)} px (screen scroll steps are excluded here)")
     delays = sorted({d for _, d, _ in frames})
     lines.append(f"frame delays (ms): {delays}; total {total} ms")
-    open(os.path.join(out, "report.txt"), "w").write("\n".join(lines) + "\n")
+    open(os.path.join(out, "report.txt"), "w", encoding="utf-8").write("\n".join(lines) + "\n")
     print("\n".join(lines)); print("written to", out)
 
 
