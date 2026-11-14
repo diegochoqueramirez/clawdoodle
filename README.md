@@ -40,6 +40,21 @@ It asks whether to install **globally** (`~/.claude/skills`, all your projects) 
 
 In non-interactive shells (CI, pipes) it installs globally unless you pass `--project`.
 
+### With skills.sh
+
+```bash
+npx skills add diegochoqueramirez/clawdoodle -a claude-code        # this project
+npx skills add diegochoqueramirez/clawdoodle -a claude-code -g     # all projects
+```
+
+This only copies the files. Run the one-time setup afterwards (creates the Python venv with Pillow and checks Chrome):
+
+```bash
+python3 .claude/skills/clawdoodle/scripts/setup.py     # with -g: ~/.claude/skills/clawdoodle/scripts/setup.py
+```
+
+On Windows use `py` instead of `python3`. `npx clawdoodle` does the copy and the setup in one step.
+
 ### Manual install
 
 ```bash
