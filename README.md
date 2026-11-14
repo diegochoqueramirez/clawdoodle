@@ -23,34 +23,32 @@ A [Claude Code](https://claude.com/claude-code) skill that turns a topic into a 
 
 ## Install
 
-### Option A: use it inside this repo
+### One command (recommended)
+
+```bash
+npx clawdoodle
+```
+
+It copies the skill to `~/.claude/skills/clawdoodle` (all your projects), creates its Python environment with Pillow and checks for Chrome. Works the same on macOS, Linux and Windows (needs Node 16.7+ and Python 3.9+).
+
+| Flag | Effect |
+|---|---|
+| `--project` | install into `./.claude/skills` (this project only) |
+| `--force` | update an existing install (your `clawdoodles/` projects are not touched) |
+| `--no-setup` | only copy the files, skip the Python/Chrome step |
+
+> Until the package is on npm, run it from a clone: `node bin/install.js`.
+
+### Manual install
 
 ```bash
 git clone https://github.com/diegochoqueramirez/clawdoodle.git
 cd clawdoodle
-.claude/skills/clawdoodle/scripts/setup.sh   # Windows: py .claude\skills\clawdoodle\scripts\setup.py
+python3 .claude/skills/clawdoodle/scripts/setup.py     # Windows: py .claude\skills\clawdoodle\scripts\setup.py
 claude
 ```
 
-Claude Code discovers the skill automatically when opened in the repo.
-
-### Option B: install it for every project (personal skill)
-
-```bash
-git clone https://github.com/diegochoqueramirez/clawdoodle.git
-mkdir -p ~/.claude/skills
-cp -R clawdoodle/.claude/skills/clawdoodle ~/.claude/skills/clawdoodle
-~/.claude/skills/clawdoodle/scripts/setup.sh
-```
-
-On Windows (PowerShell):
-
-```powershell
-git clone https://github.com/diegochoqueramirez/clawdoodle.git
-New-Item -ItemType Directory -Force $HOME\.claude\skills | Out-Null
-Copy-Item -Recurse clawdoodle\.claude\skills\clawdoodle $HOME\.claude\skills\clawdoodle
-py $HOME\.claude\skills\clawdoodle\scripts\setup.py
-```
+Claude Code discovers the skill automatically when opened in the repo. To make it global, copy `.claude/skills/clawdoodle` into `~/.claude/skills/` (`%USERPROFILE%\.claude\skills\` on Windows) and run its `scripts/setup.py`.
 
 > Windows support is implemented (cross-platform launcher, UTF-8 file I/O, `file:///` URLs, Chrome path lookup) but was only tested on macOS so far. If something fails on Windows, please open an issue.
 

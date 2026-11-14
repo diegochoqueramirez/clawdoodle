@@ -1,0 +1,11 @@
+{
+  "name": "clawdoodle",
+  "version": "0.1.0",
+  "description": "Claude Code skill that turns a topic into a looping GIF + animated SVG of Clawd",
+  "bin": { "clawdoodle": "bin/install.js" },
+  "files": ["bin", ".claude/skills/clawdoodle", "!**/.venv", "!**/__pycache__", "examples", "README.md", "LICENSE"],
+  "engines": { "node": ">=16.7" },
+  "keywords": ["claude-code", "skill", "gif", "svg", "animation", "clawd"],
+  "repository": { "type": "git", "url": "git+https://github.com/diegochoqueramirez/clawdoodle.git" },
+  "license": "MIT"
+}
