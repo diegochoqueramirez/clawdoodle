@@ -29,15 +29,16 @@ A [Claude Code](https://claude.com/claude-code) skill that turns a topic into a 
 npx clawdoodle
 ```
 
-It copies the skill to `~/.claude/skills/clawdoodle` (all your projects), creates its Python environment with Pillow and checks for Chrome. Works the same on macOS, Linux and Windows (needs Node 16.7+ and Python 3.9+).
+It asks whether to install **globally** (`~/.claude/skills`, all your projects) or **for the current project only** (`./.claude/skills`), copies the skill, creates its Python environment with Pillow and checks for Chrome. Works the same on macOS, Linux and Windows (needs Node 16.7+ and Python 3.9+).
 
 | Flag | Effect |
 |---|---|
-| `--project` | install into `./.claude/skills` (this project only) |
+| `--global` | install globally without asking |
+| `--project` | install for this project only, without asking |
 | `--force` | update an existing install (your `clawdoodles/` projects are not touched) |
 | `--no-setup` | only copy the files, skip the Python/Chrome step |
 
-> Until the package is on npm, run it from a clone: `node bin/install.js`.
+In non-interactive shells (CI, pipes) it installs globally unless you pass `--project`.
 
 ### Manual install
 
